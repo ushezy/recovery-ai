@@ -26,21 +26,21 @@ export default function BriefPage() {
       <BriefRecoveryScore
         score={recovery.score}
         level={recovery.level}
-        insight={recovery.insight}
+        insights={recovery.insights}
       />
 
       <BriefSnapshot items={snapshotItems} />
 
       <BriefRecommendation text={recommendation} />
 
-      <BriefAction text={action} />
+      <BriefAction lines={action.lines} />
 
-      <footer className="mt-20 text-center">
+      <footer className="mt-14 text-center">
         <Link
           href="/check-in"
-          className="text-sm font-light text-white/30 transition-colors duration-500 hover:text-white/50"
+          className="text-xs font-light tracking-wide text-[rgba(243,241,236,0.42)] transition-colors duration-500 hover:text-[rgba(243,241,236,0.62)]"
         >
-          Check in again
+          Check in again tomorrow
         </Link>
       </footer>
     </BriefLayout>

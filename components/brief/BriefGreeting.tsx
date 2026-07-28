@@ -5,11 +5,14 @@ type BriefGreetingProps = {
 
 export function BriefGreeting({ name, subtitle }: BriefGreetingProps) {
   return (
-    <header className="mb-14 md:mb-16">
-      <p className="text-xl font-light text-white/50 md:text-2xl">
-        Good morning{name ? `, ${name}` : ""}.
+    <header className="mb-16 md:mb-20">
+      <p className="text-[11px] font-light uppercase tracking-[0.28em] text-[rgba(243,241,236,0.42)]">
+        Good morning
       </p>
-      <p className="mt-2 text-sm font-light text-white/30">{subtitle}</p>
+      <p className="mt-3 text-xs font-light tracking-wide text-[rgba(243,241,236,0.42)]">
+        {name ? `${name} · ` : ""}
+        {subtitle}
+      </p>
     </header>
   );
 }

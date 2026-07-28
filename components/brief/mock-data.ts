@@ -7,9 +7,12 @@ export const MOCK_MORNING_BRIEF: MorningBrief = {
   },
   recovery: {
     score: 86,
-    level: "Strong recovery",
-    insight:
-      "You rested well. This morning suits your most important work.",
+    level: "Excellent Recovery",
+    insights: [
+      "You rested well.",
+      "Today favors focused work.",
+      "Protect your energy.",
+    ],
   },
   snapshot: {
     focus: "Sharp",
@@ -17,6 +20,8 @@ export const MOCK_MORNING_BRIEF: MorningBrief = {
     mood: "Calm",
   },
   recommendation:
-    "Your clearest hours are before noon. Protect that window for work that requires depth. This afternoon, lighter tasks and a short walk will help you sustain momentum without forcing it.",
-  action: "Block ninety minutes this morning for what matters most.",
+    "Morning is your clearest window. Afternoon suits lighter work. Evening calls for rest.",
+  action: {
+    lines: ["Protect the first", "90 minutes", "of your morning."],
+  },
 };

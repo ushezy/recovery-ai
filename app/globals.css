@@ -159,3 +159,43 @@ body {
 .preparing-dot {
   animation: preparing-dot-pulse 2s ease-in-out infinite;
 }
+
+/* Morning Brief — deep titanium finish */
+.brief-titanium {
+  background: linear-gradient(180deg, #3a3c40 0%, #2e3136 50%, #26282c 100%);
+}
+
+.brief-titanium-texture::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.09;
+  background-image:
+    repeating-linear-gradient(
+      -14deg,
+      transparent,
+      transparent 2px,
+      rgba(255, 255, 255, 0.035) 2px,
+      rgba(255, 255, 255, 0.035) 3px
+    ),
+    repeating-linear-gradient(
+      76deg,
+      transparent,
+      transparent 4px,
+      rgba(0, 0, 0, 0.025) 4px,
+      rgba(0, 0, 0, 0.025) 5px
+    );
+  pointer-events: none;
+}
+
+.brief-titanium-light::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 75% 40% at 50% 0%,
+    rgba(255, 255, 255, 0.05) 0%,
+    transparent 68%
+  );
+  pointer-events: none;
+}

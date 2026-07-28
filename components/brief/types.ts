@@ -6,7 +6,7 @@ export type MorningBrief = {
   recovery: {
     score: number;
     level: string;
-    insight: string;
+    insights: string[];
   };
   snapshot: {
     focus: string;
@@ -14,7 +14,9 @@ export type MorningBrief = {
     mood: string;
   };
   recommendation: string;
-  action: string;
+  action: {
+    lines: string[];
+  };
 };
 
 export type SnapshotItem = {
