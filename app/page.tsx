@@ -39,8 +39,8 @@ export default function Home() {
       </header>
 
       <main>
-        <section className="relative px-6 pb-20 md:px-10 md:pb-28 lg:px-12">
-          <div className="mx-auto max-w-2xl pt-20 text-center md:pt-28 lg:pt-32">
+        <section className="relative px-6 pb-24 md:px-10 md:pb-32 lg:px-12">
+          <div className="relative z-0 mx-auto max-w-2xl pb-20 pt-20 text-center md:pb-24 md:pt-28 lg:pt-32">
             <p className="mb-10 text-xs font-light tracking-wide text-white/35">
               Your coach
             </p>
@@ -67,7 +67,7 @@ export default function Home() {
           </div>
 
           {/* Brief preview — coach speaking, not a dashboard */}
-          <div className="relative z-10 mx-auto -mt-4 max-w-lg md:-mt-10">
+          <div className="relative z-10 mx-auto -mt-12 max-w-lg sm:-mt-16">
             <div
               aria-hidden
               className="absolute -inset-4 rounded-[2rem] bg-blue-400/[0.03] blur-2xl"
