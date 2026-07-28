@@ -1,111 +1,79 @@
-const RECOVERY_SCORE = 82;
+"use client";
 
-const RECOMMENDATIONS = [
-  "Complete your most important task before noon.",
-  "Take a 20-minute walk after lunch.",
-  "Stay hydrated throughout the day.",
-  "Avoid multitasking during deep work.",
-];
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
-function GlassCard({
-  children,
-  className = "",
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
-  return (
-    <section
-      className={`rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm md:p-8 ${className}`}
-    >
-      {children}
-    </section>
-  );
-}
+/* ── Placeholder content — replace with OpenAI-generated brief ── */
+const BRIEF = {
+  insight:
+    "You rested well. Mornings like this suit focused work — you'll know where to place your energy.",
+  timeline: [
+    { period: "Morning", note: "Your clearest window. Protect it." },
+    { period: "Afternoon", note: "Lighter work. A walk may help." },
+    { period: "Evening", note: "Wind down early." },
+  ],
+  closing: "Ninety minutes this morning for what matters most.",
+};
 
 export default function BriefPage() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const t = setTimeout(() => setVisible(true), 120);
+    return () => clearTimeout(t);
+  }, []);
+
   return (
-    <main className="min-h-screen bg-gradient-to-b from-black via-gray-950 to-black px-6 py-12 text-white">
-      <div className="mx-auto w-full max-w-2xl">
-        <header className="mb-10 text-center">
-          <h1 className="text-4xl font-extrabold tracking-tight md:text-5xl">
-            Good Morning 👋
-          </h1>
-          <p className="mt-3 text-xl text-gray-400">
-            Here&apos;s your personalized AI Morning Brief.
-          </p>
+    <main className="relative min-h-screen bg-[#050816] text-white">
+      <div aria-hidden className="pointer-events-none absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#08111F] via-[#050816] to-[#0E1A2B]" />
+        <div className="absolute left-1/2 top-[20%] h-80 w-80 -translate-x-1/2 rounded-full bg-blue-400/[0.03] blur-[100px]" />
+      </div>
+
+      <div
+        className={`relative mx-auto max-w-lg px-6 pb-16 pt-16 transition-all duration-[1600ms] ease-out md:px-8 md:pt-20 ${
+          visible ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
+        }`}
+      >
+        <header className="mb-12 md:mb-14">
+          <p className="text-lg font-light text-white/45">Good morning.</p>
         </header>
 
-        <div className="space-y-5">
-          <GlassCard className="text-center">
-            <p className="text-7xl font-extrabold tracking-tight tabular-nums md:text-8xl">
-              {RECOVERY_SCORE}
-            </p>
-            <p className="mt-2 text-sm font-medium uppercase tracking-widest text-gray-400">
-              Recovery Score
-            </p>
-            <div className="mt-8">
-              <div className="h-2 overflow-hidden rounded-full bg-gray-800/80">
-                <div
-                  className="h-full rounded-full bg-gradient-to-r from-gray-200 to-white transition-all"
-                  style={{ width: `${RECOVERY_SCORE}%` }}
-                />
+        <section className="mb-16 md:mb-20">
+          <p className="text-2xl font-light leading-relaxed text-white/75 md:text-[1.75rem] md:leading-10">
+            {BRIEF.insight}
+          </p>
+        </section>
+
+        <section className="mb-16 md:mb-20">
+          <div className="space-y-8">
+            {BRIEF.timeline.map((block) => (
+              <div key={block.period} className="flex gap-6">
+                <p className="w-24 shrink-0 text-sm font-light text-white/35">
+                  {block.period}
+                </p>
+                <p className="text-base font-light leading-relaxed text-white/50">
+                  {block.note}
+                </p>
               </div>
-              <p className="mt-2 text-right text-xs tabular-nums text-gray-500">
-                {RECOVERY_SCORE}%
-              </p>
-            </div>
-          </GlassCard>
+            ))}
+          </div>
+        </section>
 
-          <GlassCard>
-            <h2 className="text-sm font-medium uppercase tracking-widest text-gray-400">
-              Today&apos;s Outlook
-            </h2>
-            <p className="mt-4 text-xl font-medium leading-relaxed text-gray-100">
-              Today looks like a high-focus day.
-            </p>
-            <p className="mt-3 leading-relaxed text-gray-400">
-              Your recovery and energy levels are above average.
-            </p>
-          </GlassCard>
+        <section className="mb-20 md:mb-24">
+          <p className="text-base font-light leading-relaxed text-white/45">
+            {BRIEF.closing}
+          </p>
+        </section>
 
-          <GlassCard>
-            <h2 className="text-sm font-medium uppercase tracking-widest text-gray-400">
-              AI Recommendations
-            </h2>
-            <ul className="mt-5 space-y-4">
-              {RECOMMENDATIONS.map((item) => (
-                <li
-                  key={item}
-                  className="flex gap-3 text-gray-300 leading-relaxed"
-                >
-                  <span
-                    className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-white/70"
-                    aria-hidden
-                  />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </GlassCard>
-
-          <GlassCard>
-            <h2 className="text-sm font-medium uppercase tracking-widest text-gray-400">
-              Quote of the Day
-            </h2>
-            <blockquote className="mt-5 text-xl font-medium italic leading-relaxed text-gray-200">
-              &ldquo;Small improvements every day lead to remarkable
-              results.&rdquo;
-            </blockquote>
-          </GlassCard>
-        </div>
-
-        <button
-          type="button"
-          className="mt-10 w-full rounded-2xl bg-white px-8 py-4 text-lg font-semibold text-black transition hover:scale-[1.02] hover:bg-gray-200 active:scale-[0.98]"
-        >
-          Start My Day →
-        </button>
+        <footer className="text-center">
+          <Link
+            href="/check-in"
+            className="text-sm font-light text-white/30 transition-colors duration-500 hover:text-white/50"
+          >
+            Check in again
+          </Link>
+        </footer>
       </div>
     </main>
   );

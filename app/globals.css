@@ -8,8 +8,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,5 +21,141 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+}
+
+.check-in-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.check-in-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 28px;
+  width: 28px;
+  border-radius: 9999px;
+  background: #ffffff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.check-in-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.08);
+}
+
+.check-in-slider::-moz-range-thumb {
+  height: 28px;
+  width: 28px;
+  border: none;
+  border-radius: 9999px;
+  background: #ffffff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+.check-in-slider::-moz-range-track {
+  height: 6px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+@keyframes check-in-value-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes check-in-label-enter {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes check-in-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.check-in-value-enter {
+  animation: check-in-value-enter 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.check-in-label-enter {
+  animation: check-in-label-enter 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.06s both;
+}
+
+.check-in-spin {
+  animation: check-in-spin 1.4s linear infinite;
+}
+
+@keyframes preparing-ring-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes preparing-ring-spin-reverse {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes preparing-dot-pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes preparing-breathe {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.06);
+  }
+}
+
+.preparing-breathe {
+  animation: preparing-breathe 4s ease-in-out infinite;
+}
+
+.preparing-breathe-delay {
+  animation: preparing-breathe 4s ease-in-out 1s infinite;
+}
+
+.preparing-ring {
+  animation: preparing-ring-spin 3s linear infinite;
+}
+
+.preparing-ring-reverse {
+  animation: preparing-ring-spin-reverse 4s linear infinite;
+}
+
+.preparing-dot {
+  animation: preparing-dot-pulse 2s ease-in-out infinite;
 }
