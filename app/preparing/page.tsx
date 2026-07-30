@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { brief } from "@/components/brief/styles";
 
 const REFLECTIONS = [
   "How you rested.",
@@ -25,30 +26,25 @@ export default function PreparingPage() {
   }, [router]);
 
   return (
-    <main className="relative flex min-h-screen flex-col items-center justify-center bg-[#050816] px-8 text-white">
-      <div aria-hidden className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#08111F] via-[#050816] to-[#0E1A2B]" />
-        <div className="absolute left-1/2 top-1/2 h-[28rem] w-[28rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-400/[0.025] blur-[140px]" />
-      </div>
-
+    <main className={`${brief.shell} flex flex-col items-center justify-center px-8`}>
       <div className="relative z-10 flex flex-col items-center text-center">
-        <p className="text-xl font-medium tracking-tight text-white/60 md:text-2xl">
+        <p className={`${brief.pauseTitle} ${brief.textSecondary}`}>
           One moment.
         </p>
-        <p className="mt-4 max-w-xs text-sm font-light leading-relaxed text-white/35">
+        <p className={`mt-4 max-w-xs ${brief.caption} ${brief.textMuted}`}>
           Considering what you shared.
         </p>
 
         <div className="relative my-20 h-20 w-20 md:my-28 md:h-24 md:w-24">
-          <div className="preparing-breathe absolute inset-0 rounded-full border border-white/[0.08]" />
-          <div className="preparing-breathe-delay absolute inset-4 rounded-full border border-white/[0.04]" />
+          <div className={`preparing-breathe absolute inset-0 rounded-full border ${brief.border}`} />
+          <div className={`preparing-breathe-delay absolute inset-4 rounded-full border ${brief.borderSubtle}`} />
         </div>
 
         <div className="relative h-10 w-full max-w-sm">
           {REFLECTIONS.map((line, i) => (
             <p
               key={line}
-              className={`absolute inset-x-0 text-base font-light leading-relaxed text-white/40 transition-all duration-[1400ms] ease-out md:text-lg ${
+              className={`absolute inset-x-0 text-base font-light leading-relaxed ${brief.whisper} md:text-lg ${brief.textMuted} ${
                 phase === i + 1
                   ? "translate-y-0 opacity-100"
                   : "translate-y-2 opacity-0"
@@ -59,7 +55,7 @@ export default function PreparingPage() {
           ))}
 
           <p
-            className={`absolute inset-x-0 text-base font-light leading-relaxed text-white/55 transition-all duration-[1400ms] ease-out md:text-lg ${
+            className={`absolute inset-x-0 text-base font-light leading-relaxed ${brief.whisper} md:text-lg ${brief.textSecondary} ${
               phase >= 4
                 ? "translate-y-0 opacity-100"
                 : "translate-y-2 opacity-0"

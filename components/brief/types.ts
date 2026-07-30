@@ -1,23 +1,11 @@
-export type MorningBrief = {
-  greeting: {
-    name: string;
-    subtitle: string;
-  };
-  recovery: {
-    score: number;
-    level: string;
-    insights: string[];
-  };
-  snapshot: {
-    focus: string;
-    energy: string;
-    mood: string;
-  };
-  recommendation: string;
-  action: {
-    lines: string[];
-  };
-};
+export type {
+  MorningBriefAction,
+  MorningBriefGreeting,
+  MorningBriefOutput as MorningBrief,
+  MorningBriefSnapshot,
+  RecoveryLevel,
+  TimelineItem,
+} from "@/lib/recovery";
 
 export type SnapshotItem = {
   label: "Focus" | "Energy" | "Mood";

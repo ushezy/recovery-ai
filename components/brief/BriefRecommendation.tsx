@@ -1,16 +1,21 @@
+import { brief } from "./styles";
+import type { TimelineItem } from "./types";
+
 type BriefRecommendationProps = {
-  text: string;
+  items: TimelineItem[];
 };
 
-export function BriefRecommendation({ text }: BriefRecommendationProps) {
+export function BriefRecommendation({ items }: BriefRecommendationProps) {
   return (
-    <section className="mb-20 md:mb-24">
-      <p className="mb-6 text-[10px] font-light uppercase tracking-[0.22em] text-[rgba(243,241,236,0.42)]">
-        Today&apos;s recommendation
-      </p>
-      <p className="text-sm font-extralight leading-[1.85] text-[rgba(243,241,236,0.42)] md:text-[15px]">
-        {text}
-      </p>
+    <section className={brief.section}>
+      <div className="space-y-6">
+        {items.map((block) => (
+          <div key={block.period} className="flex gap-5">
+            <p className={brief.timelinePeriod}>{block.period}</p>
+            <p className={brief.supporting}>{block.note}</p>
+          </div>
+        ))}
+      </div>
     </section>
   );
 }

@@ -1,3 +1,5 @@
+import { brief } from "./styles";
+
 type BriefGreetingProps = {
   name: string;
   subtitle: string;
@@ -5,14 +7,16 @@ type BriefGreetingProps = {
 
 export function BriefGreeting({ name, subtitle }: BriefGreetingProps) {
   return (
-    <header className="mb-16 md:mb-20">
-      <p className="text-[11px] font-light uppercase tracking-[0.28em] text-[rgba(243,241,236,0.42)]">
+    <header className="mb-20 md:mb-24">
+      <p className={`${brief.greeting} ${brief.textMuted}`}>
         Good morning
       </p>
-      <p className="mt-3 text-xs font-light tracking-wide text-[rgba(243,241,236,0.42)]">
-        {name ? `${name} · ` : ""}
-        {subtitle}
-      </p>
+      {(name || subtitle) && (
+        <p className={`mt-3 text-xs font-light tracking-wide ${brief.textMuted}`}>
+          {name ? `${name} · ` : ""}
+          {subtitle}
+        </p>
+      )}
     </header>
   );
 }
