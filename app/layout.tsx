@@ -9,8 +9,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Recovery AI",
-  description: "A calm AI coach for your mornings.",
+  title: "Recovery AI | Know your recovery. Own your day.",
+  description: "Personalized recovery insights for better daily decisions.",
 };
 
 export default function RootLayout({

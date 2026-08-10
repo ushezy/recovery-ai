@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { openai } from "@/lib/openai/client";
 import { testOpenAI } from "@/lib/openai/test";
 
 export async function GET() {
