@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { FormEvent, useState } from "react";
+import { FormEvent, useCallback, useState } from "react";
+import { TurnstileWidget } from "./TurnstileWidget";
 
 const features = [
   { title: "Understand Your Recovery", copy: "Know how recovered you really are—not just how you feel.", icon: "01" },
@@ -23,19 +24,24 @@ export function LaunchSite() {
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [turnstileResetKey, setTurnstileResetKey] = useState(0);
+  const handleTurnstileToken = useCallback((token: string) => setTurnstileToken(token), []);
 
   async function submitWaitlist(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!email.trim()) return;
+    if (!email.trim() || !turnstileToken) return;
     setIsSubmitting(true);
     setSubmitError("");
     try {
-      const response = await fetch("/api/waitlist", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email }) });
+      const response = await fetch("/api/waitlist", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email, turnstileToken }) });
       const data = (await response.json()) as { success?: boolean; error?: string };
       if (!response.ok || !data.success) throw new Error(data.error || "Unable to join the waitlist right now.");
       setSubmitted(true);
     } catch (error) {
       setSubmitError(error instanceof Error ? error.message : "Unable to join the waitlist right now.");
+      setTurnstileToken("");
+      setTurnstileResetKey((key) => key + 1);
     } finally {
       setIsSubmitting(false);
     }
@@ -104,7 +110,7 @@ export function LaunchSite() {
         <section id="join-alpha" className="scroll-mt-20 mx-auto max-w-[1200px] px-6 py-24 md:px-10 md:py-[120px] lg:px-16">
           <div className="relative overflow-hidden rounded-2xl border border-[#14263d]/10 bg-[#e7eee7] px-6 py-12 md:px-12 md:py-16"><div aria-hidden className="absolute -right-24 -top-28 h-72 w-72 rounded-full bg-white/55 blur-3xl" />
             <div className="relative grid gap-10 lg:grid-cols-[1fr_0.85fr] lg:items-end"><div><p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#577365]">Join Alpha</p><h2 className="mt-5 max-w-2xl text-4xl font-semibold leading-[1.06] tracking-[-0.055em] md:text-5xl">Be among the first to experience Recovery AI.</h2><p className="mt-6 max-w-xl leading-7 text-[#536173]">Recovery AI is currently in Alpha. We&apos;re inviting a limited number of early users to help shape the future of AI-powered recovery.</p></div>
-              <div>{submitted ? <p className="rounded-xl border border-[#577365]/30 bg-white/75 px-5 py-4 text-sm font-medium text-[#294837]" role="status">You&apos;re on the list. We&apos;ll be in touch.</p> : <form onSubmit={submitWaitlist} className="flex flex-col gap-3"><label className="sr-only" htmlFor="waitlist-email">Email address</label><input id="waitlist-email" type="email" required disabled={isSubmitting} value={email} onChange={(event) => setEmail(event.target.value)} placeholder="Enter your email" className="h-12 min-w-0 rounded-xl border border-[#14263d]/15 bg-white/85 px-4 text-sm outline-none placeholder:text-[#748091] focus:border-[#14263d] focus:ring-2 focus:ring-[#14263d]/15 disabled:cursor-not-allowed disabled:opacity-60" /><button type="submit" disabled={isSubmitting} className={`${button} w-full disabled:cursor-not-allowed disabled:opacity-60`}>{isSubmitting ? "Joining…" : "Join Alpha Waitlist"}</button></form>}{submitError && <p className="mt-4 text-sm font-medium text-[#9e3f35]" role="alert">{submitError}</p>}<p className="mt-4 text-sm text-[#687485]">No spam. Only meaningful product updates.</p></div>
+              <div>{submitted ? <p className="rounded-xl border border-[#577365]/30 bg-white/75 px-5 py-4 text-sm font-medium text-[#294837]" role="status">You&apos;re on the list. We&apos;ll be in touch.</p> : <form onSubmit={submitWaitlist} className="flex flex-col gap-3"><label className="sr-only" htmlFor="waitlist-email">Email address</label><input id="waitlist-email" type="email" required disabled={isSubmitting} value={email} onChange={(event) => setEmail(event.target.value)} placeholder="Enter your email" className="h-12 min-w-0 rounded-xl border border-[#14263d]/15 bg-white/85 px-4 text-sm outline-none placeholder:text-[#748091] focus:border-[#14263d] focus:ring-2 focus:ring-[#14263d]/15 disabled:cursor-not-allowed disabled:opacity-60" /><TurnstileWidget onTokenChange={handleTurnstileToken} resetKey={turnstileResetKey} /><button type="submit" disabled={isSubmitting || !turnstileToken} className={`${button} w-full disabled:cursor-not-allowed disabled:opacity-60`}>{isSubmitting ? "Joining…" : "Join Alpha Waitlist"}</button></form>}{submitError && <p className="mt-4 text-sm font-medium text-[#9e3f35]" role="alert">{submitError}</p>}<p className="mt-4 text-sm text-[#687485]">No spam. Only meaningful product updates.</p></div>
             </div>
           </div>
         </section>
