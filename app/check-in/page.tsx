@@ -5,6 +5,7 @@ import { useCallback, useState } from "react";
 import { brief } from "@/components/brief/styles";
 import { SignOutButton } from "@/components/auth/SignOutButton";
 import { saveCheckInSession, type CheckInInput } from "@/lib/check-in";
+import { saveCheckIn } from "@/app/check-in/actions";
 
 const STEPS = [
   {
@@ -58,6 +59,14 @@ const CHOICES: Record<
 
 type Answers = CheckInInput;
 
+function getLocalDate() {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, "0");
+  const day = String(today.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
 function ChoiceList({
   options,
   value,
@@ -95,6 +104,8 @@ export default function CheckInPage() {
   const router = useRouter();
   const [step, setStep] = useState(0);
   const [visible, setVisible] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveError, setSaveError] = useState("");
   const [answers, setAnswers] = useState<Answers>({
     sleep: 6,
     energy: 6,
@@ -112,12 +123,23 @@ export default function CheckInPage() {
     }, 480);
   }, []);
 
-  const handleContinue = () => {
+  const handleContinue = async () => {
     if (step < STEPS.length - 1) {
       transitionTo(step + 1);
     } else {
-      saveCheckInSession(answers);
-      router.push("/preparing");
+      setIsSaving(true);
+      setSaveError("");
+
+      const result = await saveCheckIn(answers, getLocalDate());
+
+      if (result.success) {
+        saveCheckInSession(answers, result.checkInId);
+        router.push("/preparing");
+        return;
+      }
+
+      setSaveError(result.error);
+      setIsSaving(false);
     }
   };
 
@@ -196,10 +218,16 @@ export default function CheckInPage() {
           <button
             type="button"
             onClick={handleContinue}
+            disabled={isSaving}
             className={`w-full py-4 text-base ${brief.cta}`}
           >
-            {current.cta}
+            {isSaving ? "Saving..." : current.cta}
           </button>
+          {saveError && (
+            <p className={`mt-3 text-center text-sm ${brief.textMuted}`} role="alert">
+              {saveError}. Please try again.
+            </p>
+          )}
         </div>
       </div>
     </main>
