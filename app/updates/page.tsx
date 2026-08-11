@@ -45,7 +45,7 @@ export default function UpdatesPage() {
               <span className="rounded-full bg-[#dcebdc] px-3 py-1 text-[#294837]">
                 Alpha
               </span>
-              <time dateTime="2026-08-11">August 11, 2026</time>
+              <time dateTime="2026-08">August 2026</time>
             </div>
 
             <h2 className="mt-6 text-3xl font-semibold leading-tight tracking-[-0.045em] md:text-4xl">
@@ -53,36 +53,85 @@ export default function UpdatesPage() {
             </h2>
 
             <div className="mt-7 space-y-5 text-[15px] leading-7 text-[#536173] md:text-base">
+              <p>Today marks an important milestone for Recovery AI.</p>
               <p>
-                Today, Recovery AI enters Alpha. The first version of our daily recovery
-                experience is now live at recoverybrief.com.
+                After months of product design, engineering, and iteration, Recovery AI has
+                officially entered the Alpha stage.
               </p>
               <p>
-                Alpha users can sign in securely by email, complete a short daily check-in,
-                receive a recovery score, and generate a personalized AI Morning Brief with
-                practical guidance for the day ahead.
+                This is the first version of Recovery AI that brings together our complete
+                core experience:
               </p>
+              <ul className="list-disc space-y-2 pl-6 marker:text-[#577365]">
+                <li>Daily Check-in</li>
+                <li>Recovery Engine</li>
+                <li>AI Morning Brief</li>
+              </ul>
               <p>
-                This is an early version of the product. We are starting small, listening
-                closely, and improving the experience with every round of feedback.
+                Together, these components create a personalized recovery experience
+                designed to help people make better daily decisions.
               </p>
 
-              <div className="rounded-2xl border border-[#14263d]/10 bg-white p-6 md:p-8">
-                <h3 className="font-semibold text-[#14263d]">What&apos;s live today</h3>
-                <ul className="mt-4 list-disc space-y-2 pl-6 marker:text-[#577365]">
-                  <li>Alpha Waitlist registration</li>
-                  <li>Secure email sign-in</li>
-                  <li>Daily recovery check-in</li>
-                  <li>Recovery score and insights</li>
-                  <li>Personalized AI Morning Brief</li>
-                </ul>
-              </div>
+              <section className="pt-4">
+                <h3 className="text-2xl font-semibold tracking-[-0.035em] text-[#14263d]">
+                  What We&apos;ve Built
+                </h3>
+                <div className="mt-4 space-y-5">
+                  <p>
+                    Recovery AI now supports the complete recovery workflow—from
+                    understanding your current state to receiving an AI-generated Morning
+                    Brief with practical guidance for the day ahead.
+                  </p>
+                  <p>
+                    This milestone represents the completion of our core product
+                    architecture and the beginning of something even more important:
+                    learning from real users.
+                  </p>
+                </div>
+              </section>
 
-              <p>
-                We will use this page to share the milestones, lessons, and product changes
-                that move Recovery AI from Alpha to Beta and, eventually, public launch.
-              </p>
-              <p className="font-medium text-[#14263d]">This is day one.</p>
+              <section className="pt-4">
+                <h3 className="text-2xl font-semibold tracking-[-0.035em] text-[#14263d]">
+                  What Comes Next
+                </h3>
+                <div className="mt-4 space-y-5">
+                  <p>Our focus is no longer just building features.</p>
+                  <p>
+                    Over the coming weeks, we&apos;ll work closely with our first Alpha users
+                    to understand what creates the most value, improve the Morning Brief
+                    experience, and continue refining Recovery AI through real-world
+                    feedback.
+                  </p>
+                  <p>
+                    We&apos;re committed to building deliberately, shipping continuously, and
+                    improving with every iteration.
+                  </p>
+                </div>
+              </section>
+
+              <section className="pt-4">
+                <h3 className="text-2xl font-semibold tracking-[-0.035em] text-[#14263d]">
+                  Join Us
+                </h3>
+                <div className="mt-4 space-y-5">
+                  <p>
+                    Recovery AI is currently accepting a limited number of Alpha users.
+                  </p>
+                  <p>
+                    If you&apos;d like to help shape the future of AI-powered recovery, we&apos;d
+                    love to have you{" "}
+                    <Link
+                      href="/#join-alpha"
+                      className="font-medium text-[#14263d] underline decoration-[#577365]/40 underline-offset-4 hover:decoration-[#14263d]"
+                    >
+                      join us
+                    </Link>
+                    .
+                  </p>
+                  <p>Thank you for being part of the journey.</p>
+                  <p className="font-medium text-[#14263d]">— The Recovery AI Team</p>
+                </div>
+              </section>
             </div>
           </article>
         </div>
