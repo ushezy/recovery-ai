@@ -37,6 +37,7 @@ export function TurnstileWidget({ onTokenChange, resetKey }: TurnstileWidgetProp
       callback: (token: string) => onTokenChange(token),
       "error-callback": () => onTokenChange(""),
       "expired-callback": () => onTokenChange(""),
+      language: "en",
       theme: "light",
     });
 
