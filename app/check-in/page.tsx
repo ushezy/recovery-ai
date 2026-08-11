@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
 import { brief } from "@/components/brief/styles";
+import { SignOutButton } from "@/components/auth/SignOutButton";
 import { saveCheckInSession, type CheckInInput } from "@/lib/check-in";
 
 const STEPS = [
@@ -130,6 +131,9 @@ export default function CheckInPage() {
   return (
     <main className={`${brief.shell} flex flex-col`}>
       <header className="relative z-10 flex justify-center px-6 pt-12 md:pt-14">
+        <div className="absolute right-6 top-12 md:right-10 md:top-14">
+          <SignOutButton />
+        </div>
         <div className="flex items-center gap-2.5">
           {STEPS.map((_, i) => (
             <div
