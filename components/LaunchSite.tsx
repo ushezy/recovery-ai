@@ -54,6 +54,7 @@ export function LaunchSite() {
           <Link href="/" className="text-base font-semibold tracking-[-0.04em]">Recovery AI</Link>
           <div className="flex items-center gap-5 text-sm font-medium sm:gap-8">
             <a href="#how-it-works" className="hidden transition-colors hover:text-[#577365] sm:inline">How It Works</a>
+            <Link href="/login" className="transition-colors hover:text-[#577365]">Sign In</Link>
             <a href="#join-alpha" className={`${button} h-10 px-4 shadow-none sm:h-11`}>Join Alpha</a>
           </div>
         </nav>
