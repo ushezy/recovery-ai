@@ -1,11 +1,17 @@
-import { appendFile, mkdir, readFile } from "node:fs/promises";
 import { NextResponse } from "next/server";
 
-export const runtime = "nodejs";
-
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const storageDirectory = ".data";
-const storageFile = `${storageDirectory}/waitlist.ndjson`;
+
+function getSupabaseConfig() {
+  const url = process.env.SUPABASE_URL;
+  const publishableKey = process.env.SUPABASE_PUBLISHABLE_KEY;
+
+  if (!url || !publishableKey) {
+    throw new Error("Supabase is not configured.");
+  }
+
+  return { url: url.replace(/\/$/, ""), publishableKey };
+}
 
 export async function POST(request: Request) {
   try {
@@ -16,23 +22,31 @@ export async function POST(request: Request) {
       return NextResponse.json({ success: false, error: "Please enter a valid email address." }, { status: 400 });
     }
 
-    await mkdir(storageDirectory, { recursive: true });
-
-    const existing = await readFile(storageFile, "utf8").catch(() => "");
-    const alreadyJoined = existing.split("\n").some((line) => {
-      try {
-        return (JSON.parse(line) as { email?: string }).email === email;
-      } catch {
-        return false;
-      }
+    const { url, publishableKey } = getSupabaseConfig();
+    const response = await fetch(`${url}/rest/v1/waitlist`, {
+      method: "POST",
+      headers: {
+        apikey: publishableKey,
+        Authorization: `Bearer ${publishableKey}`,
+        "Content-Type": "application/json",
+        Prefer: "return=minimal",
+      },
+      body: JSON.stringify({ email }),
     });
 
-    if (!alreadyJoined) {
-      await appendFile(storageFile, `${JSON.stringify({ email, createdAt: new Date().toISOString() })}\n`, "utf8");
+    if (response.ok) {
+      return NextResponse.json({ success: true, alreadyJoined: false });
     }
 
-    return NextResponse.json({ success: true, alreadyJoined });
-  } catch {
+    const error = (await response.json().catch(() => null)) as { code?: string } | null;
+
+    if (response.status === 409 && error?.code === "23505") {
+      return NextResponse.json({ success: true, alreadyJoined: true });
+    }
+
+    throw new Error(`Supabase insert failed with status ${response.status}.`);
+  } catch (error) {
+    console.error("Waitlist submission failed", error);
     return NextResponse.json(
       { success: false, error: "Unable to save your email right now. Please try again." },
       { status: 500 },
