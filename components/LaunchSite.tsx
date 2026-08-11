@@ -117,7 +117,7 @@ export function LaunchSite() {
         </section>
       </main>
 
-      <footer className="border-t border-[#14263d]/10"><div className="mx-auto flex max-w-[1200px] flex-col gap-8 px-6 py-10 md:px-10 lg:flex-row lg:items-end lg:justify-between lg:px-16"><div><p className="font-semibold tracking-[-0.03em]">Recovery AI</p><p className="mt-2 max-w-sm text-sm leading-6 text-[#536173]">Helping people make better daily decisions through recovery intelligence.</p></div><div className="flex flex-wrap gap-x-6 gap-y-3 text-sm text-[#536173]"><Link href="/privacy" className="hover:text-[#14263d]">Privacy Policy</Link><a href="mailto:contact@recoverybrief.com" className="hover:text-[#14263d]">Contact</a></div></div><p className="mx-auto max-w-[1200px] px-6 pb-8 text-xs text-[#748091] md:px-10 lg:px-16">© 2026 Recovery AI. All rights reserved.</p></footer>
+      <footer className="border-t border-[#14263d]/10"><div className="mx-auto flex max-w-[1200px] flex-col gap-8 px-6 py-10 md:px-10 lg:flex-row lg:items-end lg:justify-between lg:px-16"><div><p className="font-semibold tracking-[-0.03em]">Recovery AI</p><p className="mt-2 max-w-sm text-sm leading-6 text-[#536173]">Helping people make better daily decisions through recovery intelligence.</p></div><div className="flex flex-wrap gap-x-6 gap-y-3 text-sm text-[#536173]"><Link href="/privacy" className="hover:text-[#14263d]">Privacy Policy</Link><Link href="/terms" className="hover:text-[#14263d]">Terms of Service</Link><a href="mailto:contact@recoverybrief.com" className="hover:text-[#14263d]">Contact</a></div></div><p className="mx-auto max-w-[1200px] px-6 pb-8 text-xs text-[#748091] md:px-10 lg:px-16">© 2026 Recovery AI. All rights reserved.</p></footer>
     </div>
   );
 }
