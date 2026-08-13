@@ -95,6 +95,20 @@ export default function ContactPage() {
             </ul>
           </div>
         </section>
+
+        <section className="mt-12 border-t border-[#14263d]/10 pt-8">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#577365]">
+            Follow Recovery AI
+          </p>
+          <a
+            href="https://x.com/RecoveryBrief"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 inline-flex items-center gap-2 text-base font-semibold text-[#14263d] underline decoration-[#577365]/30 underline-offset-4 transition-colors hover:text-[#577365]"
+          >
+            X <span aria-hidden>↗</span>
+          </a>
+        </section>
       </main>
 
       <footer className="border-t border-[#14263d]/10">
